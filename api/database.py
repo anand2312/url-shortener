@@ -71,10 +71,10 @@ class Database:
         """
         Creates the tables in the database if they haven't been made already.
         """
-        urls = """CREATE TABLE IF NOT EXISTS urls(short CHAR(10) PRIMARY KEY, long VARCHAR(500) NOT NULL, clicks INT DEFAULT 0, created_at TIMESTAMP DEFAULT (now() AT TIME ZONE 'utc'), created_by CHAR(20) REFERENCES users(uid))"""
-        authenticated_users = """CREATE TABLE IF NOT EXISTS users(uid CHAR(20) PRIMARY KEY, token CHAR(13) UNIQUE NOT NULL"""
-        await self.db.execute(query=urls)
+        urls = """CREATE TABLE IF NOT EXISTS urls(short CHAR(10) PRIMARY KEY, long VARCHAR(500) NOT NULL, clicks INT DEFAULT 0, created_at TIMESTAMP NOT NULL, created_by CHAR(20) REFERENCES users(uid))"""
+        authenticated_users = """CREATE TABLE IF NOT EXISTS users(uid CHAR(20) PRIMARY KEY, token CHAR(13) UNIQUE NOT NULL)"""
         await self.db.execute(query=authenticated_users)
+        await self.db.execute(query=urls)
 
     @is_connected
     async def execute(self, query: str, **kwargs: Any) -> str:
@@ -94,7 +94,7 @@ class Database:
 
     @is_connected
     async def fetchval(self, query: str, **kwargs: Any) -> Optional[Any]:
-        return await self.db.fetch_one(query=query, values=kwargs)
+        return await self.db.fetch_val(query=query, values=kwargs)
 
     @is_connected
     async def iterate(self, query: str, **kwargs: Any) -> AsyncGenerator[Mapping, None]:
