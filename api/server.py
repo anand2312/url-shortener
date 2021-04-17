@@ -12,9 +12,11 @@ from api.utils import authenticate_token, create_short_url, create_user
 
 load_dotenv(find_dotenv())
 
+API_BASE = os.environ.get("API_BASE_URL", "http://localhost:8000")
+
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-REDIRECT = os.environ.get("REDIRECT", "http://localhost:8000/callback")
+REDIRECT = API_BASE + "/callback"
 
 
 app = FastAPI(title="URL Shortener", docs_url=None, redoc_url="/docs")
