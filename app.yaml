@@ -1,0 +1,5 @@
+runtime: python38
+
+instance_class: F1
+
+entrypoint: gunicorn -b :8080 api:app -w 4 -k uvicorn.workers.UvicornWorker
