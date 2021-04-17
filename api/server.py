@@ -62,7 +62,7 @@ async def new_short_url(body: ShortURL) -> Response:
 
     short = await create_short_url(db, token=body.token, long=body.long_url)
 
-    return {"short_url": API_BASE + short}
+    return {"short_url": API_BASE + "/" + short}
 
 
 @app.get("/{short_url}", include_in_schema=False)
