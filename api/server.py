@@ -10,7 +10,7 @@ from api.database import Database
 from api.models import LoggedInResponse, ShortURL, SuccessfulShortURLResponse
 from api.utils import authenticate_token, create_short_url, create_user
 
-load_dotenv("dev.env")
+load_dotenv(".env")
 
 API_BASE = os.environ.get("API_BASE_URL", "http://localhost:8000")
 
