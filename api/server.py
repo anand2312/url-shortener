@@ -16,7 +16,7 @@ API_BASE = os.environ.get("API_BASE_URL", "http://localhost:8000")
 
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-REDIRECT = API_BASE + "/callback"
+REDIRECT = os.environ.get("AUTH_CALLBACK_URL", "http://localhost:8000/callback")
 
 
 app = FastAPI(title="URL Shortener", docs_url=None, redoc_url="/docs")
